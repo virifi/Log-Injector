@@ -1,6 +1,6 @@
 #Log Injector
 
-Androidアプリの全メソッドにLog.dをインジェクトするプログラムです。 
+対象のAndroidアプリの全メソッドにLog.dをインジェクトするプログラムです。 
 smali/baksmaliのコードをベースにしています。
 
 ### 動作環境
@@ -34,7 +34,7 @@ $ mvn package
 
 ### 使用方法
 
-ダウンロードしたアーカイブを任意のディレクトリに解凍し、それに含まれているlog-injector.shを実行。 
+ダウンロードしたアーカイブを任意のディレクトリに解凍し、それに含まれているlog-injector.shを実行。  
 ただし、中に含まれている3つのファイル
 
 * log-injector.sh
@@ -100,7 +100,7 @@ $ adb logcat -s smali| perl -MTime::Piece -pe 's/^.*:/localtime->strftime("%F %T
 ```
 
 ### ライセンス
-
+```
 /* 
  * Copyright (C) 2012 virifi 
  * 
@@ -115,4 +115,5 @@ $ adb logcat -s smali| perl -MTime::Piece -pe 's/^.*:/localtime->strftime("%F %T
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. 
  * See the License for the specific language governing permissions and 
  * limitations under the License. 
-*/ 
+*/
+````
