@@ -1,6 +1,8 @@
-Log Injector
+#Log Injector
+
 Androidアプリの全メソッドにLog.dをインジェクトするプログラムです。 
- 
+smali/baksmaliのコードをベースにしています。
+
 ### 動作環境
 
 以下のコマンドが使用可能なMac or Linux
@@ -24,13 +26,15 @@ $ patch -p0 < patches/baksmali_pom.xml.patch # 同上
 $ mvn package
 ```
 これによって、
-./smali/target/smali-1.3.4-dev-jar-with-dependencies.jar 
-./baksmali/target/baksmali-1.3.4-dev-jar-with-dependencies.jar 
+
+* ./smali/target/smali-1.3.4-dev-jar-with-dependencies.jar 
+* ./baksmali/target/baksmali-1.3.4-dev-jar-with-dependencies.jar 
+
 が生成される。
 
 ### 使用方法
 
-ダウンロードしたアーカイブを任意のディレクトリに解凍し、それに含まれているlog-injector.shを実行。
+ダウンロードしたアーカイブを任意のディレクトリに解凍し、それに含まれているlog-injector.shを実行。 
 ただし、中に含まれている3つのファイル
 
 * log-injector.sh
@@ -74,7 +78,8 @@ total 7656
 -rwxr-xr-x  1 virifi  staff     2516  6 26 15:44 log-injector.sh
 -rw-r--r--  1 virifi  staff  2446518  6 26 13:28 smali-1.3.4-dev-jar-with-dependencies.jar
 $ ./log-injector/log-injector.sh
-Usage : ./log-injector/log-injector.sh <apk_path> <path_to_keystore> <alias_for_keystore_entry>  or
+Usage : ./log-injector/log-injector.sh <apk_path> <path_to_keystore> <alias_for_keystore_entry>
+   or
 Usage : ./log-injector/log-injector.sh <apk_path>  # don't sign
 $ ./log-injector/log-injector.sh Target.apk hogehoge.key hogehoge_alias
 . . . 省略. . .
@@ -91,5 +96,23 @@ $ adb logcat -s smali| perl -MTime::Piece -pe 's/^.*:/localtime->strftime("%F %T
 ...
 # Logが出力された時間を表示し、標準出力とlog.txtに同時に書き出す。
 # ある操作を行う前の時間を記憶しておき、その時間の直後のLogを見ることにより 
-# その操作の後、アプリ内のどの部分が働いているをある程度把握することができる。
+# その操作の後、アプリ内のどの部分が働いているかをある程度把握することができる。
 ```
+
+### ライセンス
+
+/* 
+ * Copyright (C) 2012 virifi 
+ * 
+ * Licensed under the Apache License, Version 2.0 (the "License"); 
+ * you may not use this file except in compliance with the License. 
+ * You may obtain a copy of the License at 
+ * 
+ *      http://www.apache.org/licenses/LICENSE-2.0 
+ * 
+ * Unless required by applicable law or agreed to in writing, software 
+ * distributed under the License is distributed on an "AS IS" BASIS, 
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. 
+ * See the License for the specific language governing permissions and 
+ * limitations under the License. 
+*/ 
