@@ -120,7 +120,17 @@ public class MethodDefinition {
             } else {
                 writer.write(".registers ");
             }
-            writer.printSignedIntAsDec(getRegisterCount(encodedMethod));
+
+            // Log.d requires two registers.
+            int registerCount = getRegisterCount(encodedMethod);
+            if (baksmali.useLocalsDirective) {
+                if (registerCount < 2) {
+                    registerCount = 2;
+                }
+            } else if (registerCount + 2 <= 16) { // Max number of registers is 16.
+                registerCount += 2;
+            }
+            writer.printSignedIntAsDec(registerCount);
             writer.write('\n');
             writeParameters(writer, codeItem, parameterAnnotations);
             if (annotationSet != null) {
@@ -129,9 +139,20 @@ public class MethodDefinition {
 
             writer.write('\n');
 
+            int itemCount = 0;
             for (MethodItem methodItem: getMethodItems()) {
                 if (methodItem.writeTo(writer)) {
                     writer.write('\n');
+                    itemCount++;
+                }
+                if (itemCount > 3)
+                    continue;
+                //if (itemCount == 2 && !encodedMethod.method.getMethodName().getStringValue().equals("<init>")) {
+                if (itemCount == 1) {
+                    //writer.write("DEBUG : " + encodedMethod.method.getMethodName().getStringValue() + "\n\n");
+                    writer.write("const-string v0, \"smali\"\n\n");
+                    writer.write("const-string v1, \"" + encodedMethod.method.getMethodString() + "\"\n\n");
+                    writer.write("invoke-static {v0, v1}, Landroid/util/Log;->d(Ljava/lang/String;Ljava/lang/String;)I\n\n");
                 }
             }
         } else {
