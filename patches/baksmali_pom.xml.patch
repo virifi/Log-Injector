@@ -1,0 +1,18 @@
+--- ./baksmali/pom.xml	2012-06-26 10:39:46.000000000 +0900
++++ ./baksmali/pom_mac.xml	2012-06-26 10:42:03.000000000 +0900
+@@ -68,7 +68,7 @@
+                         <option>-dontnote com.google.common.base.**</option>
+                     </options>
+                     <libs>
+-                        <lib>${java.home}/lib/rt.jar</lib>
++                        <lib>/System/Library/Frameworks/JavaVM.framework/Versions/1.6.0/Classes/classes.jar</lib>
+                     </libs>
+                 </configuration>
+                 <dependencies>
+@@ -104,4 +104,4 @@
+             <version>1.2</version>
+         </dependency>
+     </dependencies>
+-</project>
+\ No newline at end of file
++</project>
