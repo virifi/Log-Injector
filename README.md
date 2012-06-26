@@ -1,7 +1,6 @@
 #Log Injector
 
-対象のAndroidアプリの全メソッドにLog.dをインジェクトするプログラムです。 
-smali/baksmaliのコードをベースにしています。
+対象のAndroidアプリの全メソッドにLog.dをインジェクトするプログラムです。smali/baksmaliのコードをベースにしています。
 
 ### 動作環境
 
@@ -115,5 +114,5 @@ $ adb logcat -s smali| perl -MTime::Piece -pe 's/^.*:/localtime->strftime("%F %T
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. 
  * See the License for the specific language governing permissions and 
  * limitations under the License. 
-*/
+ */
 ````
